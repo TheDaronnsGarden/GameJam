@@ -1,8 +1,8 @@
 require 'gosu'
 
 require_relative 'z_order'
-require_relative 'Hero'
-require_relative 'Window'
+require_relative '../Classes/Hero'
+require_relative '../Classes/Window'
 
 WindowWidth = 1920
 WindowHeight = 1080

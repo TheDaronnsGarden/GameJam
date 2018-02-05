@@ -2,9 +2,9 @@ class Window < Gosu::Window
 
   def initialize(width, height)
     super
-    self.caption = ""
+    self.caption = "Mon jeu"
 
-    @background_image = Gosu::Image.new("../Ressources/background.png")
+    @background_image = Gosu::Image.new("../ressources/picture.jpg")
 
     @player = Player.new
   end

@@ -37,8 +37,8 @@ class Hero
     @x %= 1024
     @y += @velocityY
     @y %= 576
-    @velocityX *= 1
-    @velocityY *= 1
+    @velocityX *= 0
+    @velocityY *= 0
   end
 
 end

@@ -38,10 +38,8 @@ class Hero
     # Modification de l'image du perso en fonction de son mouvement
     if (move_x == 0)
       @cur_image = @stop
-    elsif (@dir == :left)
-      @cur_image = @left
     else
-      @cur_image = @right
+      @cur_image = @left # image @left car Hero.draw effectue lui-même la symétrie
     end
 
     if (@vy < 0)

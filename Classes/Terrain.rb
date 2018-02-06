@@ -52,7 +52,7 @@ class Terrain
     end
   end
 
-  # Solid at a given pixel position?
+  # Le bloc x,y existe ?
   def isSolid(x, y)
     y < 0 || @tiles[x / 50][y / 50]
   end

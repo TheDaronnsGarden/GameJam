@@ -6,17 +6,17 @@ class Hero
   def initialize(map, x, y)
     @x, @y = x, y
     @dir = :left
-    @vy = 0 # Vertical velocity
+    @vy = 0 # Vitesse en y
     @map = map
-    # Load all animation frames
-    @standing, @walk1, @walk2, @jump = *Gosu::Image.load_tiles("../ressources/cptn_ruby.png", 50, 50)
-    # This always points to the frame that is currently drawn.
-    # This is set in update, and used in draw.
-    @cur_image = @standing
+    # Chargement images du perso
+    @stop, @left, @right, @jump = *Gosu::Image.load_tiles("../ressources/cptn_ruby.png", 50, 50)
+    
+    # L'image de base est l'arrêt
+    @cur_image = @stop
   end
 
   def draw
-    # Flip vertically when facing to the left.
+    # Symetrie verticale selon la direction où regarde le perso
     if @dir == :left
       offs_x = -25
       factor = 1.0
@@ -35,20 +35,20 @@ class Hero
   end
 
   def update(move_x)
-    # Select image depending on action
+    # Modification de l'image du perso en fonction de son mouvement
     if (move_x == 0)
-      @cur_image = @standing
+      @cur_image = @stop
     elsif (@dir == :left)
-      @cur_image = @walk1
+      @cur_image = @left
     else
-      @cur_image = @walk2
+      @cur_image = @right
     end
 
     if (@vy < 0)
       @cur_image = @jump
     end
 
-    # Directional walking, horizontal movement
+    # Direction et mouvement horizontal
     if move_x > 0
       @dir = :right
       move_x.times { if would_fit(1, 0) then @x += 1 end }
@@ -58,11 +58,8 @@ class Hero
       (-move_x).times { if would_fit(-1, 0) then @x -= 1 end }
     end
 
-    # Acceleration/gravity
-    # By adding 1 each frame, and (ideally) adding vy to y, the player's
-    # jumping curve will be the parabole we want it to be.
+    # Mouvement vertical
     @vy += 1
-    # Vertical movement
     if @vy > 0
       @vy.times { if would_fit(0, 1) then @y += 1 else @vy = 0 end }
     end
@@ -72,7 +69,8 @@ class Hero
 
   end
 
-  def try_to_jump
+  def jump
+    # Si le bloc du dessus n'est pas solide, le perso peut sauter
     if @map.isSolid(@x, @y + 1)
       @vy = -15
     end

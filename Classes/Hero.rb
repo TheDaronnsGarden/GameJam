@@ -2,12 +2,14 @@
 class Hero
 
   attr_reader :x, :y
+  attr_accessor :vy
 
   def initialize(map, x, y)
     @x, @y = x, y
     @dir = :left
     @vy = 0 # Vitesse en y
     @map = map
+    @mort = false
     # Chargement images du perso
     @stop, @left, @jump = *Gosu::Image.load_tiles("../ressources/TilesSprites2.png", 53, 53)
 
@@ -79,4 +81,12 @@ class Hero
       @vy = -15
     end
   end
+
+  def blockUnder
+    
+  end
+
+
+
+
 end

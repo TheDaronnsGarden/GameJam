@@ -9,7 +9,7 @@ module Tiles
 end
 
 class Terrain
-  attr_reader :width, :height, :gems
+  attr_reader :width, :height
 
   def initialize
 
@@ -34,6 +34,14 @@ class Terrain
         end
       end
     end
+
+    # for x in 0..@width
+    # 	for y in 0..@height
+    # 		puts "#{x},#{y} = #{@tiles[x][y]}"
+    # 	end
+    # end
+
+
   end
 
 
@@ -54,22 +62,43 @@ class Terrain
 
   # Le bloc x,y existe ?
   def isSolid(x, y)
-    y < 0 || @tiles[x / 50][y / 50]
+    y < 0 || @tiles[x / 50][y / 50] # @tiles[x][y] == nul return false
+  end
+
+  def blockUnder(x=400, y=249)
+
+  	l, m = x/50, (y/50)+1
+
+  	begin
+  		tile = @tiles[l][m]
+  	rescue Exception => e
+  		puts "Erreur"
+  	else
+  		case tile
+  		when 0
+  			0
+  		when 1
+  			1
+  		else
+  			-1
+  		end
+  	end
   end
 
   # Genere le fichier niv.txt que sera chargé dans le jeu
   def genererTerrain
 
-  	nbTerrains = 5 #Nb total de terrains
-  	terrainHeight = 3 # Hauteur des terrains
+  	nbTerrains = 1 # Nb TOTAL de terrains
+  	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final
+  	terrainHeight = 6 # Hauteur des terrains
 
-  	nums = 5.times.map{ Random.rand(nbTerrains) }
+  	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
 
   	tab = Array.new(terrainHeight)
 
 	File.open('../ressources/nivText/niv.txt', 'w') do |output_file|
 
-		for i in 0..4
+		for i in 0..nbGenTerrain-1
 			# f0 = File.readlines('./niv.txt')
 			# f0 = f0.map {|elem| elem.chomp}
 

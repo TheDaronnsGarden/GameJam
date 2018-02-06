@@ -34,6 +34,15 @@ class Niveau < Gosu::Window
     # Caméra suit le joueur
     @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
     @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
+
+    action(@map.blockUnder(@hero.x, @hero.y))
+
+  end
+
+  def action(i)
+    if (i ==1)
+      @hero.vy = -50
+    end
   end
 
   # Dessine le background et gère le mouvement de la caméra

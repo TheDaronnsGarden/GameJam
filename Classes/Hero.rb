@@ -9,7 +9,7 @@ class Hero
     @vy = 0 # Vitesse en y
     @map = map
     # Chargement images du perso
-    @stop, @left, @right, @jump = *Gosu::Image.load_tiles("../ressources/TilesSprites.png", 50, 50)
+    @stop, @left, @jump = *Gosu::Image.load_tiles("../ressources/TilesSprites2.png", 53, 53)
 
     # L'image de base est l'arrêt
     @cur_image = @stop
@@ -42,8 +42,14 @@ class Hero
       @cur_image = @left # image @left car Hero.draw effectue lui-même la symétrie
     end
 
+    # Si le perso saute
     if (@vy < 0)
-      @cur_image = @jump
+      # Si le perso est immobile
+      if (move_x == 0)
+        @cur_image = @stop
+      else
+        @cur_image = @jump
+      end
     end
 
     # Direction et mouvement horizontal

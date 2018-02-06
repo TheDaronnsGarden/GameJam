@@ -4,8 +4,8 @@ require_relative '../Classes/Hero'
 #require_relative '../Classes/Window'
 require_relative '../Classes/Terrain'
 
-WindowWidth = 500
-WindowHeight = 500
+WindowWidth = 1080
+WindowHeight = 720
 
 
 class Niveau < Gosu::Window
@@ -14,8 +14,8 @@ class Niveau < Gosu::Window
 
     self.caption = "hero. Ruby"
 
-    @sky = Gosu::Image.new("../ressources/space.png", :tileable => true)
-    @map = Terrain.new("../ressources/mapText.txt")
+    @sky = Gosu::Image.new("../ressources/sky.jpg", :tileable => true)
+    @map = Terrain.new
     @hero = Hero.new(@map, 400, 100)
     # The scrolling position is stored as top left corner of the screen.
     @camera_x = @camera_y = 0
@@ -23,11 +23,11 @@ class Niveau < Gosu::Window
 
   def update
     move_x = 0
-    move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
-    move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
+    move_x -= 10 if Gosu.button_down? Gosu::KB_LEFT
+    move_x += 10 if Gosu.button_down? Gosu::KB_RIGHT
     @hero.update(move_x)
-    # @hero.collect_gems(@map.gems)
-    # Scrolling follows player
+
+    # Caméra suit le joueur
     @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
     @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
   end

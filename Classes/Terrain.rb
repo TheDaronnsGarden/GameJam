@@ -4,6 +4,8 @@ require 'gosu'
 module Tiles
   Grass = 0
   Earth = 1
+  Pic = 2
+
 end
 
 class Terrain
@@ -11,30 +13,24 @@ class Terrain
 
   def initialize
 
-  	# Méthode de generation du terrain
-  	genererTerrain
-
-  	# Nom du fichier texte créé par genererTerrain
   	filename = "../ressources/nivText/niv.txt"
 
-    # Charge les textures des blocs
+  	genererTerrain
+
+    # Load 60x60 tiles, 5px overlap in all four directions.
     @tileset = Gosu::Image.load_tiles("../ressources/tileset.png", 60, 60, :tileable => true)
     lines = File.readlines(filename).map { |line| line.chomp }
-
-    # Dimension du fichier texte contenant le terrain
     @height = lines.size
     @width = lines[0].size
-
-    # Traduction des caractères du fichier texte en éléments de textures
     @tiles = Array.new(@width) do |x|
       Array.new(@height) do |y|
         case lines[y][x, 1]
-	        when '"'
-	          Tiles::Grass
-	        when '#'
-	          Tiles::Earth
-	        else
-	          nil
+        when '"'
+          Tiles::Grass
+        when '#'
+          Tiles::Earth
+        else
+          nil
         end
       end
     end
@@ -42,19 +38,21 @@ class Terrain
 
 
   def draw
-    # Dessine toutes les tuiles contenues dans @tiles
+    # Very primitive drawing function:
+    # Draws all the tiles, some off-screen, some on-screen.
     @height.times do |j|
       @width.times do |i|
         tile = @tiles[i][j]
         if tile
-          # Dessine les tuiles
+          # Draw the tile with an offset (tile images have some overlap)
+          # Scrolling is implemented here just as in the game objects.
           @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
         end
       end
     end
   end
-  
-  # Nature du bloc à la position x, y ? (solide ?)
+
+  # Solid at a given pixel position?
   def isSolid(x, y)
     y < 0 || @tiles[x / 50][y / 50]
   end
@@ -70,8 +68,10 @@ class Terrain
   	tab = Array.new(terrainHeight)
 
 	File.open('../ressources/nivText/niv.txt', 'w') do |output_file|
-		
+
 		for i in 0..4
+			# f0 = File.readlines('./niv.txt')
+			# f0 = f0.map {|elem| elem.chomp}
 
 			nomF = "../ressources/nivText/#{nums[i]}.txt"
 			f = File.readlines(nomF)
@@ -79,11 +79,13 @@ class Terrain
 
 			f.each_with_index do |elem, j|
 		 		tab[j] = "#{tab[j]}#{elem}"
-		 	end			
+		 	end
 		end
 
 		f.each_with_index do |elem, j|
 		 	output_file.puts "#{tab[j]}"
+		 		# puts elem
+		 		# puts f0[j]
 		end
 	end
   end

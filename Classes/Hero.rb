@@ -9,8 +9,8 @@ class Hero
     @vy = 0 # Vitesse en y
     @map = map
     # Chargement images du perso
-    @stop, @left, @right, @jump = *Gosu::Image.load_tiles("../ressources/cptn_ruby.png", 50, 50)
-    
+    @stop, @left, @right, @jump = *Gosu::Image.load_tiles("../ressources/TilesSprites.png", 50, 50)
+
     # L'image de base est l'arrêt
     @cur_image = @stop
   end

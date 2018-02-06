@@ -62,7 +62,10 @@ class Terrain
 
   # Solid at a given pixel position?
   def isSolid(x, y)
-    y < 0 || @tiles[x / 50][y / 50] # @tiles[x][y] == nul return false
+    (y < 0 || @tiles[x / 50][y / 50]) && (not @tiles[x / 50][y / 50] == 4)
+
+    # @tiles[x][y] == nul return false
+    # @tiles[x / 50][y / 50] == 4 ==> Case poison traversable
   end
 
   def blockUnder(x=400, y=249)
@@ -102,7 +105,7 @@ class Terrain
 			# f0 = File.readlines('./niv.txt')
 			# f0 = f0.map {|elem| elem.chomp}
 
-			nomF = "../ressources/nivText/#{nums[i]}.txt"
+			nomF = "../ressources/nivText/1.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

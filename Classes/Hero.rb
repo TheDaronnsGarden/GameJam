@@ -38,9 +38,12 @@ class Hero
     # Select image depending on action
     if (move_x == 0)
       @cur_image = @standing
+    elsif (@dir == :left)
+      @cur_image = @walk1
     else
-      @cur_image = (Gosu.milliseconds / 175 % 2 == 0) ? @walk1 : @walk2
+      @cur_image = @walk2
     end
+
     if (@vy < 0)
       @cur_image = @jump
     end

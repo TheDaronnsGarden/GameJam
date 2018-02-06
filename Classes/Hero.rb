@@ -1,3 +1,4 @@
+
 class Hero
 
   attr_reader :x, :y
@@ -8,9 +9,7 @@ class Hero
     @vy = 0 # Vertical velocity
     @map = map
     # Load all animation frames
-    @standing
-    @walk1
-    @walk2
+    @standing, @walk1, @walk2 = *Gosu::Image.load_tiles("../ressources/cptn_ruby.png", 53, 53)
     # This always points to the frame that is currently drawn.
     # This is set in update, and used in draw.
     @cur_image = @standing
@@ -31,8 +30,8 @@ class Hero
   # Could the object be placed at x + offs_x/y + offs_y without being stuck?
   def would_fit(offs_x, offs_y)
     # Check at the center/top and center/bottom for map collisions
-    not @map.solid?(@x + offs_x, @y + offs_y) and
-      not @map.solid?(@x + offs_x, @y + offs_y - 45)
+    not @map.isSolid(@x + offs_x, @y + offs_y) and
+      not @map.isSolid(@x + offs_x, @y + offs_y - 45)
   end
 
   def update(move_x)
@@ -70,15 +69,8 @@ class Hero
   end
 
   def try_to_jump
-    if @map.solid?(@x, @y + 1)
+    if @map.isSolid(@x, @y + 1)
       @vy = -20
-    end
-  end
-
-  def collect_gems(gems)
-    # Same as in the tutorial game.
-    gems.reject! do |c|
-      (c.x - @x).abs < 50 and (c.y - @y).abs < 50
     end
   end
 end

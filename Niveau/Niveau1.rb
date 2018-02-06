@@ -6,9 +6,11 @@ require_relative '../Classes/Terrain'
 
 WindowWidth = 500
 WindowHeight = 500
-class Niveau
+
+
+class Niveau < Gosu::Window
   def initialize
-    super WIDTH, HEIGHT
+    super WindowWidth, WindowHeight
 
     self.caption = "hero. Ruby"
 
@@ -24,10 +26,10 @@ class Niveau
     move_x -= 5 if Gosu.button_down? Gosu::KB_LEFT
     move_x += 5 if Gosu.button_down? Gosu::KB_RIGHT
     @hero.update(move_x)
-    @hero.collect_gems(@map.gems)
+    # @hero.collect_gems(@map.gems)
     # Scrolling follows player
-    @camera_x = [[@hero.x - WIDTH / 2, 0].max, @map.width * 50 - WIDTH].min
-    @camera_y = [[@hero.y - HEIGHT / 2, 0].max, @map.height * 50 - HEIGHT].min
+    @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
+    @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
   end
 
   def draw

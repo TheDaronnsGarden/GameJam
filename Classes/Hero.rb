@@ -2,14 +2,14 @@
 class Hero
 
   attr_reader :x, :y
-  attr_accessor :vy
+  attr_accessor :vy, :mort
 
   def initialize(map, x, y)
     @x, @y = x, y
     @dir = :left
     @vy = 0 # Vitesse en y
     @map = map
-    @mort = false
+    @mort = false # Le perso n'est pas mort de base (logique)
     # Chargement images du perso
     @stop, @left, @jump = *Gosu::Image.load_tiles("../ressources/TilesSprites2.png", 53, 53)
 
@@ -37,21 +37,27 @@ class Hero
   end
 
   def update(move_x)
-    # Modification de l'image du perso en fonction de son mouvement
-    if (move_x == 0)
-      @cur_image = @stop
-    else
-      @cur_image = @left # image @left car Hero.draw effectue lui-même la symétrie
-    end
+      # Modification de l'image du perso en fonction de son mouvement
+    # Si le perso est toujours en vie, 
+    if (not self.isDead)
 
-    # Si le perso saute
-    if (@vy < 0)
-      # Si le perso est immobile
       if (move_x == 0)
         @cur_image = @stop
       else
-        @cur_image = @jump
+        @cur_image = @left # image @left car Hero.draw effectue lui-même la symétrie
       end
+
+      # Si le perso saute
+      if (@vy < 0)
+        # Si le perso est immobile
+        if (move_x == 0)
+          @cur_image = @stop
+        else
+          @cur_image = @jump
+        end
+      end
+    else 
+      @cur_image = @dead
     end
 
     # Direction et mouvement horizontal
@@ -82,8 +88,8 @@ class Hero
     end
   end
 
-  def blockUnder
-    
+  def isDead
+    @mort
   end
 
 

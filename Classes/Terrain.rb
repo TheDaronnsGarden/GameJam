@@ -6,7 +6,7 @@ module Tiles
   Earth = 1
   Champi = 2
   Pic = 3
-  F = 4
+  Poison = 4
 end
 
 class Terrain
@@ -35,19 +35,12 @@ class Terrain
         when 'O'
           Tiles::Champi
         when 'E'
-          Tiles::F
+          Tiles::Poison
         else
           nil
         end
       end
     end
-
-    # for x in 0..@width
-    # 	for y in 0..@height
-    # 		puts "#{x},#{y} = #{@tiles[x][y]}"
-    # 	end
-    # end
-
 
   end
 
@@ -81,22 +74,22 @@ class Terrain
   	rescue Exception => e
   		puts "Erreur"
   	else
-  		case tile
-  		when 0
-  			0
-  		when 1
-  			1
+  		# Si tile existe (n'est pas nul), on retourn sa valeur
+  		if (tile)
+  			tile
+  		# Sinon on return -1	
   		else
   			-1
   		end
+
   	end
   end
 
   # Genere le fichier niv.txt que sera chargé dans le jeu
   def genererTerrain
 
-  	nbTerrains = 1 # Nb TOTAL de terrains
-  	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final
+  	nbTerrains = 5 # Nb TOTAL de terrains
+  	nbGenTerrain = 10 # Nb de terrain à générer pour le niveau final
   	terrainHeight = 6 # Hauteur des terrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }

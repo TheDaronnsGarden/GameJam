@@ -25,23 +25,31 @@ class Niveau < Gosu::Window
 
   def update
 
-    move_x = 0
+    if (not @hero.isDead)
 
-    if (Gosu.button_down?(Gosu::KB_LEFT)) then move_x -= 10 end
-    if (Gosu.button_down?(Gosu::KB_RIGHT)) then move_x += 10 end
-    @hero.update(move_x)
+      puts @hero.isDead
 
-    # Caméra suit le joueur
-    @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
-    @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
+      move_x = 0
 
-    action(@map.blockUnder(@hero.x, @hero.y))
+      if (Gosu.button_down?(Gosu::KB_LEFT)) then move_x -= 8 end
+      if (Gosu.button_down?(Gosu::KB_RIGHT)) then move_x += 8 end
+      @hero.update(move_x)
+
+      # Caméra suit le joueur
+      @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
+      @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
+
+      action(@map.blockUnder(@hero.x, @hero.y))
+
+    else
+      exit(0)
+    end
 
   end
 
   def action(i)
-    if (i ==1)
-      @hero.vy = -50
+    if (i == 2 || i == 3 || i == 4)
+      @hero.mort = true
     end
   end
 

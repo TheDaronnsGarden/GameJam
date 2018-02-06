@@ -4,8 +4,9 @@ require 'gosu'
 module Tiles
   Grass = 0
   Earth = 1
-  Pic = 2
-
+  Champi = 2
+  Pic = 3
+  F = 4
 end
 
 class Terrain
@@ -18,7 +19,7 @@ class Terrain
   	genererTerrain
 
     # Load 60x60 tiles, 5px overlap in all four directions.
-    @tileset = Gosu::Image.load_tiles("../ressources/tileset.png", 60, 60, :tileable => true)
+    @tileset = Gosu::Image.load_tiles("../ressources/tileset4.png", 60, 60, :tileable => true)
     lines = File.readlines(filename).map { |line| line.chomp }
     @height = lines.size
     @width = lines[0].size
@@ -29,6 +30,12 @@ class Terrain
           Tiles::Grass
         when '#'
           Tiles::Earth
+        when 'X'
+          Tiles::Pic
+        when 'O'
+          Tiles::Champi
+        when 'E'
+          Tiles::F
         else
           nil
         end
@@ -52,7 +59,7 @@ class Terrain
     end
   end
 
-  # Le bloc x,y existe ?
+  # Solid at a given pixel position?
   def isSolid(x, y)
     y < 0 || @tiles[x / 50][y / 50]
   end

@@ -27,8 +27,6 @@ class Niveau < Gosu::Window
 
     if (not @hero.isDead)
 
-      puts @hero.isDead
-
       move_x = 0
 
       if (Gosu.button_down?(Gosu::KB_LEFT)) then move_x -= 8 end
@@ -42,7 +40,7 @@ class Niveau < Gosu::Window
       action(@map.blockUnder(@hero.x, @hero.y))
 
     else
-      exit(0)
+      @hero.update(0)
     end
 
   end
@@ -66,7 +64,9 @@ class Niveau < Gosu::Window
   def button_down(id)
     case id
     when Gosu::KB_UP
-      @hero.jump
+      if (not @hero.isDead)
+        @hero.jump
+      end
     when Gosu::KB_ESCAPE
       close
     else

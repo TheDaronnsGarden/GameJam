@@ -11,7 +11,7 @@ class Hero
     @map = map
     @mort = false # Le perso n'est pas mort de base (logique)
     # Chargement images du perso
-    @stop, @left, @jump = *Gosu::Image.load_tiles("../ressources/TilesSprites2.png", 53, 53)
+    @stop, @left, @jump, @dead = *Gosu::Image.load_tiles("../ressources/TilesSprites3.png", 53, 53)
 
     # L'image de base est l'arrêt
     @cur_image = @stop
@@ -38,7 +38,7 @@ class Hero
 
   def update(move_x)
       # Modification de l'image du perso en fonction de son mouvement
-    # Si le perso est toujours en vie, 
+    # Si le perso est toujours en vie, mouvement normaux
     if (not self.isDead)
 
       if (move_x == 0)

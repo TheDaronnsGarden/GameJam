@@ -1,6 +1,6 @@
 require 'gosu'
 
-require_relative 'Niveau1.rb'
+require_relative 'Niveau.rb'
 
 jeu = Niveau.new()
 jeu.show()

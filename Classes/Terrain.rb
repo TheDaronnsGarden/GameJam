@@ -80,7 +80,7 @@ class Terrain
   # Solid at a given pixel position?
   def isSolid(x, y)
     (y < 0 || @tiles[x / 50][y / 50]) &&
-      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 5) && (not @tiles[x / 50][y / 50] == 6) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8))
+      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 5) && (not @tiles[x / 50][y / 50] == 6) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8) && (not @tiles[x / 50][y / 50] == 9))
 
     # @tiles[x][y] == nul return false
     # @tiles[x / 50][y / 50] == 2 -> Case champi traversable

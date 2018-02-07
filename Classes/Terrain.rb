@@ -10,6 +10,7 @@ module Tiles
   Piege = 6
   EpvtG = 7
   EpvtM = 8
+  ChampiInv = 9
 end
 
 class Terrain
@@ -35,8 +36,10 @@ class Terrain
           Tiles::Earth
         when 'X'
           Tiles::Pic
-        when 'O'
+        when 'C'
           Tiles::Champi
+        when 'c'
+          Tiles::ChampiInv
         when '~'
           Tiles::Poison
         when 'R'
@@ -63,8 +66,11 @@ class Terrain
       @width.times do |i|
         tile = @tiles[i][j]
         if tile
-          # Draw the tile with an offset (tile images have some overlap)
-          # Scrolling is implemented here just as in the game objects.
+          
+          if (tile == 9) # Si c'est le champiInv, on lui charge la texture du champi 2
+            tile = 2
+          end
+
           @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
         end
       end
@@ -74,7 +80,7 @@ class Terrain
   # Solid at a given pixel position?
   def isSolid(x, y)
     (y < 0 || @tiles[x / 50][y / 50]) &&
-      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8))
+      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 5) && (not @tiles[x / 50][y / 50] == 6) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8))
 
     # @tiles[x][y] == nul return false
     # @tiles[x / 50][y / 50] == 2 -> Case champi traversable

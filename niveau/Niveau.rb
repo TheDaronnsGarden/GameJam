@@ -65,12 +65,18 @@ class Niveau < Gosu::Window
 
     # BLOC DANS LE PERSO
     if (where == 0)
-      if (i == 2) # bloc champi
+      if (i == 2) # Bloc champi normal
+
         @moveLeft = -8
         @moveRight = -8
       end
 
-      if (i == 3 || i == 8)
+      if (i == 9)  # Bloc champi inverse
+        @moveLeft = 8
+        @moveRight = 8
+      end
+
+      if (i == 3  || i == 5 || i == 6 || i == 8) # Pics, rateau, piège, épouvantail méchant
         @hero.mort = true
       end
 

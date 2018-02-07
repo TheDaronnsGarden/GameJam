@@ -1,3 +1,4 @@
+. = AIR / RIEN
 " = HERBE
 # = TERRE
 X = PICS

@@ -90,21 +90,27 @@ class Terrain
   # Genere le fichier niv.txt que sera chargé dans le jeu
   def genererTerrain
 
-  	nbTerrains = 5 # Nb TOTAL de terrains
-  	nbGenTerrain = 10 # Nb de terrain à générer pour le niveau final
-  	terrainHeight = 6 # Hauteur des terrains
+  	nbTerrains = 5 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
+  	nbGenTerrain = 0 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
+  	terrainHeight = 10 # Hauteur des terrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
 
   	tab = Array.new(terrainHeight)
 
+      # Le niveau de départ est toujours D.txt
+      f0 = File.readlines("ressources/nivText/D.txt")
+      f0 = f0.map {|elem| elem.chomp}
+      f0.each_with_index do |elem, j|
+        tab[j] = "#{elem}"
+      end
+
+  # Ajout a tab des nbGenTerrain sélectionnés au hasard
 	File.open('ressources/nivText/niv.txt', 'w') do |output_file|
 
 		for i in 0..nbGenTerrain-1
-			# f0 = File.readlines('./niv.txt')
-			# f0 = f0.map {|elem| elem.chomp}
 
-			nomF = "ressources/nivText/1.txt"
+			nomF = "ressources/nivText/#{nums[i]}.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 
@@ -113,10 +119,16 @@ class Terrain
 		 	end
 		end
 
-		f.each_with_index do |elem, j|
+    # Le niveau de fin est toujours F.txt
+    f1 = File.readlines("ressources/nivText/F.txt")
+    f1 = f1.map {|elem| elem.chomp}
+    f1.each_with_index do |elem, j|
+      tab[j] = "#{tab[j]}#{elem}"
+    end
+
+    # On rempli le fichier "output_file" avec les données des autres terrains générés
+		f1.each_with_index do |elem, j|
 		 	output_file.puts "#{tab[j]}"
-		 		# puts elem
-		 		# puts f0[j]
 		end
 	end
   end

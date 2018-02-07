@@ -6,6 +6,10 @@ module Tiles
   Champi = 2
   Pic = 3
   Poison = 4
+  Rateau = 5
+  Piege = 6
+  EpvtG = 7
+  EpvtM = 8
 end
 
 class Terrain
@@ -18,7 +22,7 @@ class Terrain
   	genererTerrain
 
     # Load 60x60 tiles, 5px overlap in all four directions.
-    @tileset = Gosu::Image.load_tiles("ressources/tileset4.png", 60, 60, :tileable => true)
+    @tileset = Gosu::Image.load_tiles("ressources/tileset5.png", 60, 60, :tileable => true)
     lines = File.readlines(filename).map { |line| line.chomp }
     @height = lines.size
     @width = lines[0].size
@@ -35,6 +39,14 @@ class Terrain
           Tiles::Champi
         when '~'
           Tiles::Poison
+        when 'R'
+          Tiles::Rateau
+        when 'P'
+          Tiles::Piege
+        when 'G'
+          Tiles::EpvtG
+        when 'M'
+          Tiles::EpvtM
         else
           nil
         end
@@ -79,7 +91,7 @@ class Terrain
   		# Si tile existe (n'est pas nul), on retourn sa valeur
   		if (tile)
   			tile
-  		# Sinon on return -1	
+  		# Sinon on return -1
   		else
   			-1
   		end

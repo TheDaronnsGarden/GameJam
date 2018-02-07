@@ -4,7 +4,7 @@ require_relative '../Classes/Hero'
 require_relative '../Classes/Terrain'
 
 # Taille de la fenêtre de jeu
-WindowWidth = 1080
+WindowWidth = 1280
 WindowHeight = 720
 
 
@@ -71,12 +71,13 @@ class Niveau < Gosu::Window
         @moveRight = -8
       end
 
-      if (i == 9)  # Bloc champi inverse
+
+      if (i == 13)  # Bloc champi inverse     	
         @moveLeft = 8
         @moveRight = 8
       end
 
-      if (i == 3  || i == 5 || i == 6 || i == 8) # Pics, rateau, piège, épouvantail méchant
+      if (i == 3  || i == 5 || i == 6 || i == 8 || i == 12) # Pics, rateau, piège, épouvantail méchant, pics inversés
         @hero.mort = true
       end
 

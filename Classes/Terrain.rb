@@ -73,11 +73,12 @@ class Terrain
 
   # Solid at a given pixel position?
   def isSolid(x, y)
-    (y < 0 || @tiles[x / 50][y / 50]) && ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 4))
+    (y < 0 || @tiles[x / 50][y / 50]) && ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4))
 
     # @tiles[x][y] == nul return false
-    # @tiles[x / 50][y / 50] == 4 ==> Case poison traversable
     # @tiles[x / 50][y / 50] == 2 ==> Case champi traversable
+    # @tiles[x / 50][y / 50] == 3 ==> Case pics traversable
+    # @tiles[x / 50][y / 50] == 4 ==> Case poison traversable
   end
 
   # Nature du bloc aux coordonnées x, y
@@ -124,7 +125,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/un.txt"
+			nomF = "ressources/nivText/0.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

@@ -20,7 +20,7 @@ class Niveau < Gosu::Window
     @hero = Hero.new(@map, 400, 445)
 
     # Nombre de pixels par tick
-    @moveLeft, @moveRight = 1, 9
+    @moveLeft, @moveRight = 9, 9
     
     # postion du la caméra (en haut à cauche par défaut)
     @camera_x = @camera_y = 0
@@ -70,9 +70,13 @@ class Niveau < Gosu::Window
         @moveRight = -1
       end
 
+      if (i == 3)
+        @hero.mort = true
+      end
+
     # BLOC SOUS LE PERSO
     elsif (where == 1)
-      if (i == 3 || i == 4) # bloc pic et poison
+      if (i == 4) # bloc pic et poison
         @hero.mort = true
       end
     end

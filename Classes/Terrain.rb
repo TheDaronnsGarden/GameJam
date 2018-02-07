@@ -73,12 +73,15 @@ class Terrain
 
   # Solid at a given pixel position?
   def isSolid(x, y)
-    (y < 0 || @tiles[x / 50][y / 50]) && ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4))
+    (y < 0 || @tiles[x / 50][y / 50]) &&
+      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8))
 
     # @tiles[x][y] == nul return false
-    # @tiles[x / 50][y / 50] == 2 ==> Case champi traversable
-    # @tiles[x / 50][y / 50] == 3 ==> Case pics traversable
-    # @tiles[x / 50][y / 50] == 4 ==> Case poison traversable
+    # @tiles[x / 50][y / 50] == 2 -> Case champi traversable
+    # @tiles[x / 50][y / 50] == 3 -> Case pics traversable
+    # @tiles[x / 50][y / 50] == 4 -> Case poison traversable
+    # @tiles[x / 50][y / 50] == 7 -> Case epouvantail gentil traversable
+    # @tiles[x / 50][y / 50] == 8 -> Case epouvantail méchant traversable
   end
 
   # Nature du bloc aux coordonnées x, y

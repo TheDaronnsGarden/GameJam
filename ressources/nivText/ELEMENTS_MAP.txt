@@ -4,3 +4,7 @@
 X = PICS -> Tue
 O = CHAMPIGNONS -> Inverse gauche / droite
 ~ = POISON -> Tue
+R = Rateau
+p = Piège à loup
+G = Épouvantail Gentil -> Ne fait rien
+M = Épouvantail Méchant -> Tue

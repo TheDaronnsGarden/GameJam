@@ -2,9 +2,14 @@
 " = HERBE -> Sol
 # = TERRE -> Sol
 X = PICS -> Tue
-O = CHAMPIGNONS -> Inverse gauche / droite
+C = CHAMPIGNONS -> Inverse gauche / droite
 ~ = POISON -> Tue
-R = Rateau
-p = Piège à loup
+R = Rateau -> Tue
+P = Piège à loup -> Tue
 G = Épouvantail Gentil -> Ne fait rien
 M = Épouvantail Méchant -> Tue
++ = Bloc gravité + -> Augmente la gravité (donc réduit la hauteur du saut)
+- = Bloc gravité - -> Réduit la gravité (donc augmente la hauteur du saut)
+= = Bloc reset effect -> Enlève les effets de gravité
+x = Pics inverses -> Tue
+c = Champi Inverse -> Remet les commandes de base

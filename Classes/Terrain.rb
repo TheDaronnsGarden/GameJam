@@ -10,7 +10,11 @@ module Tiles
   Piege = 6
   EpvtG = 7
   EpvtM = 8
-  ChampiInv = 9
+  GravityMoins = 9
+  GravityPlus = 10
+  ResetEffect = 11
+  PicsInv = 12
+  ChampiInv = 13
 end
 
 class Terrain
@@ -50,6 +54,14 @@ class Terrain
           Tiles::EpvtG
         when 'M'
           Tiles::EpvtM
+        when '+'
+          Tiles::GravityPlus
+        when '-'
+          Tiles::GravityMoins
+        when '='
+          Tiles::ResetEffect
+        when 'x'
+          Tiles::PicsInv
         else
           nil
         end
@@ -67,11 +79,16 @@ class Terrain
         tile = @tiles[i][j]
         if tile
           
-          if (tile == 9) # Si c'est le champiInv, on lui charge la texture du champi 2
+          if (tile == Tiles::ChampiInv) # Si c'est le champiInv, on lui charge la texture du champi 2
             tile = 2
           end
 
-          @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
+          if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
+            tile = 3            
+            @tileset[tile].draw(i * 50 - 5, j * 62.5, 0, 1, -1)
+          else 
+            @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
+          end
         end
       end
     end
@@ -80,14 +97,23 @@ class Terrain
   # Solid at a given pixel position?
   def isSolid(x, y)
     (y < 0 || @tiles[x / 50][y / 50]) &&
-      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 5) && (not @tiles[x / 50][y / 50] == 6) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8) && (not @tiles[x / 50][y / 50] == 9))
+      ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 5) &&
+        (not @tiles[x / 50][y / 50] == 6) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8) && (not @tiles[x / 50][y / 50] == 9) &&
+        (not @tiles[x / 50][y / 50] == 10) && (not @tiles[x / 50][y / 50] == 11) && (not @tiles[x / 50][y / 50] == 12) && (not @tiles[x / 50][y / 50] == 13))
 
     # @tiles[x][y] == nul return false
-    # @tiles[x / 50][y / 50] == 2 -> Case champi traversable
-    # @tiles[x / 50][y / 50] == 3 -> Case pics traversable
-    # @tiles[x / 50][y / 50] == 4 -> Case poison traversable
-    # @tiles[x / 50][y / 50] == 7 -> Case epouvantail gentil traversable
-    # @tiles[x / 50][y / 50] == 8 -> Case epouvantail méchant traversable
+    # Champi = 2
+    # Pic = 3
+    # Poison = 4
+    # Rateau = 5
+    # Piege = 6
+    # EpvtG = 7
+    # EpvtM = 8
+    # GravityMoins = 9
+    # GravityPlus = 10
+    # ResetEffect = 11
+    # PicsInv = 12
+    # ChampiInv = 13
   end
 
   # Nature du bloc aux coordonnées x, y

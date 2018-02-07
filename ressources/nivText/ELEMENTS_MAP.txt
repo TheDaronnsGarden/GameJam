@@ -1,0 +1,5 @@
+" = HERBE
+# = TERRE
+X = PICS
+O = CHAMPIGNONS
+~ = POISON

@@ -15,7 +15,7 @@ class Niveau < Gosu::Window
     self.caption = "The Darron's Garden"
 
     # Generation des composants du jeu
-    @sky = Gosu::Image.new("../ressources/sky.jpg", :tileable => true)
+    @sky = Gosu::Image.new("ressources/sky.jpg", :tileable => true)
     @map = Terrain.new
     @hero = Hero.new(@map, 400, 100)
     
@@ -37,7 +37,7 @@ class Niveau < Gosu::Window
       @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
       @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
 
-      action(@map.blockUnder(@hero.x, @hero.y))
+      blockAction(@map.blockUnder(@hero.x, @hero.y))
 
     else
       @hero.update(0)
@@ -45,7 +45,7 @@ class Niveau < Gosu::Window
 
   end
 
-  def action(i)
+  def blockAction(i)
     if (i == 2 || i == 3 || i == 4)
       @hero.mort = true
     end

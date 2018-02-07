@@ -11,7 +11,7 @@ class Hero
     @map = map
     @mort = false # Le perso n'est pas mort de base (logique)
     # Chargement images du perso
-    @stop, @left, @jump, @dead = *Gosu::Image.load_tiles("../ressources/TilesSprites3.png", 53, 53)
+    @stop, @left, @jump, @dead = *Gosu::Image.load_tiles("ressources/TilesSprites3.png", 53, 53)
 
     # L'image de base est l'arrêt
     @cur_image = @stop

@@ -22,9 +22,15 @@ class Terrain
 
   def initialize
 
-  	filename = "ressources/nivText/niv.txt"
+  	initialiserJeu
 
-  	genererTerrain
+  end
+
+  def initialiserJeu
+
+    filename = "ressources/nivText/niv.txt"
+
+    genererTerrain
 
     # Load 60x60 tiles, 5px overlap in all four directions.
     @tileset = Gosu::Image.load_tiles("ressources/tileset5.png", 60, 60, :tileable => true)
@@ -67,7 +73,7 @@ class Terrain
         end
       end
     end
-
+    
   end
 
 
@@ -160,7 +166,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/NiveauChampi.txt"
+			nomF = "ressources/nivText/#{nums[i]}.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

@@ -55,6 +55,10 @@ class Niveau < Gosu::Window
     # Si le héro est mort
     else
       @hero.update(0)
+      # sleep(1)
+      @hero.mort = false
+      @map.initialiserJeu
+      @hero.setPosition(400, 400)
     end
 
   end

@@ -1,5 +1,4 @@
 require 'gosu'
-require 'waitutil'
 require_relative 'menuitem.rb'
 require_relative 'menu.rb'
 

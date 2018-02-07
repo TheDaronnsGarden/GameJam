@@ -83,12 +83,12 @@ class Terrain
             tile = 2
           end
 
-          if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
-            tile = 3            
-            @tileset[tile].draw(i * 50 - 5, j * 62.5, 0, 1, -1)
-          else 
+          # if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
+          #   tile = 3            
+          #   @tileset[tile].draw(i * 50 - 5, j * 45-25, 0, 1, -1)
+          # else 
             @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
-          end
+          # end
         end
       end
     end
@@ -142,7 +142,7 @@ class Terrain
 
   	nbTerrains = 5 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
   	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
-  	terrainHeight = 10 # Hauteur des terrains
+  	terrainHeight = 15 # Hauteur des terrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
 

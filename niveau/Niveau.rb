@@ -65,23 +65,24 @@ class Niveau < Gosu::Window
 
     # BLOC DANS LE PERSO
     if (where == 0)
-      if (i == 2) # Bloc champi normal
+      if (i == Tiles::Champi) # Bloc champi normal
         @moveLeft = -8
         @moveRight = -8
       end
 
-      if (i == 13)  # Bloc champi inverse     	
+      if (i == Tiles::ChampiInv)  # Bloc champi inverse     	
         @moveLeft = 8
         @moveRight = 8
       end
 
-      if (i == 3  || i == 5 || i == 6 || i == 8 || i == 12) # Pics, rateau, piège, épouvantail méchant, pics inversés
+      # Pics, rateau, piège, épouvantail méchant, pics inversés
+      if (i == Tiles::Pic  || i == Tiles::Rateau || i == Tiles::Piege || i == Tiles::EpvtM || i == Tiles::PicsInv)
         @hero.mort = true
       end
 
     # BLOC SOUS LE PERSO
     elsif (where == 1)
-      if (i == 4) # bloc pic et poison
+      if (i == Tiles::Poison) # bloc poison
         @hero.mort = true
       end
     end

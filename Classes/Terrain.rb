@@ -103,7 +103,7 @@ class Terrain
   def genererTerrain
 
   	nbTerrains = 5 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
-  	nbGenTerrain = 0 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
+  	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
   	terrainHeight = 10 # Hauteur des terrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
@@ -122,7 +122,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/1.txt"
+			nomF = "ressources/nivText/un.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

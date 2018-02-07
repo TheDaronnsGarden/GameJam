@@ -33,7 +33,7 @@ class Terrain
           Tiles::Pic
         when 'O'
           Tiles::Champi
-        when 'E'
+        when '~'
           Tiles::Poison
         else
           nil

@@ -28,15 +28,16 @@ class Niveau < Gosu::Window
 
   def update
 
+    # Tant que le hero est en vie
     if (not @hero.isDead)
 
-      move_x = 0
+      moveX = 0
 
-      if (Gosu.button_down?(Gosu::KB_LEFT)) then move_x -= @moveLeft end
-      if (Gosu.button_down?(Gosu::KB_RIGHT)) then move_x += @moveRight end
-      @hero.update(move_x)
+      if (Gosu.button_down?(Gosu::KB_LEFT)) then moveX -= @moveLeft end
+      if (Gosu.button_down?(Gosu::KB_RIGHT)) then moveX += @moveRight end
+      @hero.update(moveX)
 
-      # Caméra suit le joueur
+      # La caméra suit le joueur
       @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
       @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
 
@@ -51,6 +52,7 @@ class Niveau < Gosu::Window
         @hero.mort = true
       end
 
+    # Si le héro est mort
     else
       @hero.update(0)
     end
@@ -59,16 +61,16 @@ class Niveau < Gosu::Window
 
   def blockAction(where, i)
     # Where : 0 tester le bloc DANS le perso
-    #         1 tester le bloc sous le perso
+    #         1 tester le bloc SOUS le perso
 
-    # SECTION DANS LE PERSO
+    # BLOC DANS LE PERSO
     if (where == 0)
       if (i == 2) # bloc champi
         @moveLeft = -9
         @moveRight = -1
       end
 
-    # SECTION SOUS LE PERSO
+    # BLOC SOUS LE PERSO
     elsif (where == 1)
       if (i == 3 || i == 4) # bloc pic et poison
         @hero.mort = true
@@ -93,7 +95,7 @@ class Niveau < Gosu::Window
         @hero.jump
       end
     when Gosu::KB_ESCAPE
-      close
+      self.close
     else
       super
     end

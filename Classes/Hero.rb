@@ -4,7 +4,7 @@ class Hero
   attr_reader :x, :y
   attr_accessor :vy, :mort
 
-  def initialize(map, x, y)
+  def initialize(map, x, y) # x,y -> Point de spawn du perso
     @x, @y = x, y
     @dir = :left
     @vy = 0 # Vitesse en y
@@ -29,6 +29,10 @@ class Hero
     @cur_image.draw(@x + offs_x, @y - 49, 0, factor, 1.0)
   end
 
+  def setPosition(x, y)
+    @x, @y = x, y
+  end
+
   # Could the object be placed at x + offs_x/y + offs_y without being stuck?
   def would_fit(offs_x, offs_y)
     # Check at the center/top and center/bottom for map collisions
@@ -36,12 +40,12 @@ class Hero
       not @map.isSolid(@x + offs_x, @y + offs_y - 45)
   end
 
-  def update(move_x)
+  def update(moveX)
       # Modification de l'image du perso en fonction de son mouvement
     # Si le perso est toujours en vie, mouvement normaux
     if (not self.isDead)
 
-      if (move_x == 0)
+      if (moveX == 0)
         @cur_image = @stop
       else
         @cur_image = @left # image @left car Hero.draw effectue lui-même la symétrie
@@ -50,7 +54,7 @@ class Hero
       # Si le perso saute
       if (@vy < 0)
         # Si le perso est immobile
-        if (move_x == 0)
+        if (moveX == 0)
           @cur_image = @stop
         else
           @cur_image = @jump
@@ -61,13 +65,13 @@ class Hero
     end
 
     # Direction et mouvement horizontal
-    if move_x > 0
+    if moveX > 0
       @dir = :right
-      move_x.times { if would_fit(1, 0) then @x += 1 end }
+      moveX.times { if would_fit(1, 0) then @x += 1 end }
     end
-    if move_x < 0
+    if moveX < 0
       @dir = :left
-      (-move_x).times { if would_fit(-1, 0) then @x -= 1 end }
+      (-moveX).times { if would_fit(-1, 0) then @x -= 1 end }
     end
 
     # Mouvement vertical

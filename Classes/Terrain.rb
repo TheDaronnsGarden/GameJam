@@ -61,22 +61,24 @@ class Terrain
 
   # Solid at a given pixel position?
   def isSolid(x, y)
-    (y < 0 || @tiles[x / 50][y / 50]) && (not @tiles[x / 50][y / 50] == 4)
+    (y < 0 || @tiles[x / 50][y / 50]) && ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 4))
 
     # @tiles[x][y] == nul return false
     # @tiles[x / 50][y / 50] == 4 ==> Case poison traversable
+    # @tiles[x / 50][y / 50] == 2 ==> Case champi traversable
   end
 
-  def blockUnder(x=400, y=249)
+  # Nature du bloc aux coordonnées x, y
+  def blockPlayer(x=0, y=0)
 
-  	l, m = x/50, (y/50)+1
+  	l, m = x/50, (y/50)
 
   	begin
   		tile = @tiles[l][m]
   	rescue Exception => e
   		puts "Erreur"
   	else
-  		# Si tile existe (n'est pas nul), on retourn sa valeur
+  		# Si tile existe (n'est pas nil), on retourn sa valeur (donc sa nature)
   		if (tile)
   			tile
   		# Sinon on return -1	
@@ -91,7 +93,7 @@ class Terrain
   def genererTerrain
 
   	nbTerrains = 5 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
-  	nbGenTerrain = 0 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
+  	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
   	terrainHeight = 10 # Hauteur des terrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
@@ -110,7 +112,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/#{nums[i]}.txt"
+			nomF = "ressources/nivText/0.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

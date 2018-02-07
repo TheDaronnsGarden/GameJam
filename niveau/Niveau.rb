@@ -21,7 +21,7 @@ class Niveau < Gosu::Window
 
     # Nombre de pixels par tick
     @moveLeft, @moveRight = 8, 8
-    
+
     # postion du la caméra (en haut à cauche par défaut)
     @camera_x = @camera_y = 0
   end
@@ -70,7 +70,7 @@ class Niveau < Gosu::Window
         @moveRight = -8
       end
 
-      if (i == Tiles::ChampiInv)  # Bloc champi inverse     	
+      if (i == Tiles::ChampiInv)  # Bloc champi inverse  
         @moveLeft = 8
         @moveRight = 8
       end

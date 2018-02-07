@@ -1,6 +1,6 @@
 . = AIR / RIEN
-" = HERBE
-# = TERRE
-X = PICS
-O = CHAMPIGNONS
-~ = POISON
+" = HERBE -> Sol
+# = TERRE -> Sol
+X = PICS -> Tue
+O = CHAMPIGNONS -> Inverse gauche / droite
+~ = POISON -> Tue

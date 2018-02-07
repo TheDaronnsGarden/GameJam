@@ -17,7 +17,10 @@ class Niveau < Gosu::Window
     # Generation des composants du jeu
     @sky = Gosu::Image.new("ressources/sky.jpg", :tileable => true)
     @map = Terrain.new
-    @hero = Hero.new(@map, 400, 100)
+    @hero = Hero.new(@map, 400, 445)
+
+    # Nombre de pixels par tick
+    @moveLeft, @moveRight = 1, 9
     
     # postion du la caméra (en haut à cauche par défaut)
     @camera_x = @camera_y = 0
@@ -25,29 +28,53 @@ class Niveau < Gosu::Window
 
   def update
 
+    # Tant que le hero est en vie
     if (not @hero.isDead)
 
-      move_x = 0
+      moveX = 0
 
-      if (Gosu.button_down?(Gosu::KB_LEFT)) then move_x -= 8 end
-      if (Gosu.button_down?(Gosu::KB_RIGHT)) then move_x += 8 end
-      @hero.update(move_x)
+      if (Gosu.button_down?(Gosu::KB_LEFT)) then moveX -= @moveLeft end
+      if (Gosu.button_down?(Gosu::KB_RIGHT)) then moveX += @moveRight end
+      @hero.update(moveX)
 
-      # Caméra suit le joueur
+      # La caméra suit le joueur
       @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
       @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
 
-      blockAction(@map.blockUnder(@hero.x, @hero.y))
+      # On test en permanence le bloc dans lequel est le perso
+      blockAction(0, @map.blockPlayer(@hero.x, @hero.y))
 
+      # On test en permanence le bloc sous le perso
+      blockAction(1, @map.blockPlayer(@hero.x, @hero.y+50))
+
+      # Si le joueur tombe dans le vide, il est mort
+      if (@hero.y > 720)
+        @hero.mort = true
+      end
+
+    # Si le héro est mort
     else
       @hero.update(0)
     end
 
   end
 
-  def blockAction(i)
-    if (i == 2 || i == 3 || i == 4)
-      @hero.mort = true
+  def blockAction(where, i)
+    # Where : 0 tester le bloc DANS le perso
+    #         1 tester le bloc SOUS le perso
+
+    # BLOC DANS LE PERSO
+    if (where == 0)
+      if (i == 2) # bloc champi
+        @moveLeft = -9
+        @moveRight = -1
+      end
+
+    # BLOC SOUS LE PERSO
+    elsif (where == 1)
+      if (i == 3 || i == 4) # bloc pic et poison
+        @hero.mort = true
+      end
     end
   end
 
@@ -68,7 +95,7 @@ class Niveau < Gosu::Window
         @hero.jump
       end
     when Gosu::KB_ESCAPE
-      close
+      self.close
     else
       super
     end

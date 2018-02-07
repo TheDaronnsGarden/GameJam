@@ -73,22 +73,24 @@ class Terrain
 
   # Solid at a given pixel position?
   def isSolid(x, y)
-    (y < 0 || @tiles[x / 50][y / 50]) && (not @tiles[x / 50][y / 50] == 4)
+    (y < 0 || @tiles[x / 50][y / 50]) && ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 4))
 
     # @tiles[x][y] == nul return false
     # @tiles[x / 50][y / 50] == 4 ==> Case poison traversable
+    # @tiles[x / 50][y / 50] == 2 ==> Case champi traversable
   end
 
-  def blockUnder(x=400, y=249)
+  # Nature du bloc aux coordonnées x, y
+  def blockPlayer(x=0, y=0)
 
-  	l, m = x/50, (y/50)+1
+  	l, m = x/50, (y/50)
 
   	begin
   		tile = @tiles[l][m]
   	rescue Exception => e
   		puts "Erreur"
   	else
-  		# Si tile existe (n'est pas nul), on retourn sa valeur
+  		# Si tile existe (n'est pas nil), on retourn sa valeur (donc sa nature)
   		if (tile)
   			tile
   		# Sinon on return -1

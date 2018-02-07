@@ -21,7 +21,7 @@ class Niveau < Gosu::Window
 
     # Nombre de pixels par tick
     @moveLeft, @moveRight = 8, 8
-    
+
     # postion du la caméra (en haut à cauche par défaut)
     @camera_x = @camera_y = 0
   end
@@ -66,7 +66,8 @@ class Niveau < Gosu::Window
     # BLOC DANS LE PERSO
     if (where == 0)
       if (i == 2) # bloc champi
-        @moveLeft = @moveRight = -8, -8
+        @moveLeft = -8
+        @moveRight = -8
       end
 
       if (i == 3 || i == 8)

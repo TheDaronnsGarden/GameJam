@@ -83,12 +83,12 @@ class Terrain
             tile = 2
           end
 
-          # if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
-          #   tile = 3            
-          #   @tileset[tile].draw(i * 50 - 5, j * 45-25, 0, 1, -1)
-          # else 
+          if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
+                     
             @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
-          # end
+          else 
+            @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 1)
+          end
         end
       end
     end

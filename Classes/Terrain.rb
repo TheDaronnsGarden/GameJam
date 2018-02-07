@@ -66,7 +66,7 @@ class Terrain
       @width.times do |i|
         tile = @tiles[i][j]
         if tile
-          
+
           if (tile == 9) # Si c'est le champiInv, on lui charge la texture du champi 2
             tile = 2
           end
@@ -134,7 +134,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/NiveauSami.txt"
+			nomF = "ressources/nivText/NiveauChampi.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

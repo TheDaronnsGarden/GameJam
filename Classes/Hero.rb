@@ -2,7 +2,7 @@
 class Hero
 
   attr_reader :x, :y
-  attr_accessor :vy, :mort
+  attr_accessor :vy, :mort, :jumpPower
 
   def initialize(map, x, y) # x,y -> Point de spawn du perso
     @x, @y = x, y
@@ -10,6 +10,7 @@ class Hero
     @vy = 0 # Vitesse en y
     @map = map
     @mort = false # Le perso n'est pas mort de base (logique)
+    @jumpPower = -15 # Puissance du saut du personnage (négatif car y inversé)
     # Chargement images du perso
     @stop, @left, @jump, @dead = *Gosu::Image.load_tiles("ressources/TilesSprites3.png", 53, 53)
 
@@ -88,7 +89,7 @@ class Hero
   def jump
     # Si le bloc du dessus n'est pas solide, le perso peut sauter
     if @map.isSolid(@x, @y + 1)
-      @vy = -15
+      @vy = @jumpPower
     end
   end
 

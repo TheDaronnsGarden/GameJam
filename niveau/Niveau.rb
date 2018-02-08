@@ -56,7 +56,7 @@ class Niveau < Gosu::Window
       blockAction(0, @map.blockPlayer(@hero.x, @hero.y))
 
       # On test en permanence le bloc sous le perso
-      blockAction(1, @map.blockPlayer(@hero.x, @hero.y+50))
+      # blockAction(1, @map.blockPlayer(@hero.x, @hero.y+50))
 
       # Si le joueur tombe dans le vide, il est mort
       if (@hero.y > WindowHeight)
@@ -92,16 +92,16 @@ class Niveau < Gosu::Window
       end
 
       # Pics, rateau, piège, épouvantail méchant, pics inversés
-      if (i == Tiles::Pic  || i == Tiles::Rateau || i == Tiles::Piege || i == Tiles::EpvtM || i == Tiles::PicsInv)
+      if (i == Tiles::Pic  || i == Tiles::Rateau || i == Tiles::Piege || i == Tiles::EpvtM || i == Tiles::PicsInv || i == Tiles::Poison)
         @hero.mort = true
       end
 
     # BLOC SOUS LE PERSO
     elsif (where == 1)
 
-      if (i == Tiles::Poison) # bloc poison
-        @hero.mort = true
-      end
+      # if (i == Tiles::Poison) # bloc poison
+      #   @hero.mort = true
+      # end
 
     end
   end

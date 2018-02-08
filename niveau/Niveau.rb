@@ -18,7 +18,7 @@ class Niveau < Gosu::Window
     self.caption = "The Darron's Garden"
 
     # Generation des composants du jeu
-    @sky = Gosu::Image.new("ressources/sky.jpg", :tileable => true)
+    @sky = Gosu::Image.new("ressources/sky1020.png", :tileable => true)
     @map = Terrain.new
     @hero = Hero.new(@map, 400, 445)
 
@@ -86,7 +86,7 @@ class Niveau < Gosu::Window
         @moveRight = -8
       end
 
-      if (i == Tiles::ChampiInv)  # Bloc champi inverse  
+      if (i == Tiles::ChampiInv)  # Bloc champi inverse
         @moveLeft = 8
         @moveRight = 8
       end

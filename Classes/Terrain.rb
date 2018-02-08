@@ -73,7 +73,7 @@ class Terrain
         end
       end
     end
-    
+
   end
 
 
@@ -90,9 +90,9 @@ class Terrain
           end
 
           if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
-                     
+
             @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
-          else 
+          else
             @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 1)
           end
         end
@@ -166,11 +166,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-<<<<<<< HEAD
-			nomF = "ressources/nivText/NiveauDur.txt"
-=======
 			nomF = "ressources/nivText/#{nums[i]}.txt"
->>>>>>> b5d31d93df0a2285e73e5ceba655cc6db47df046
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

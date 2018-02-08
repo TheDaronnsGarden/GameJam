@@ -2,6 +2,7 @@ require 'gosu'
 
 require_relative '../Classes/Hero'
 require_relative '../Classes/Terrain'
+require_relative '../WindowMenu.rb'
 
 # Taille de la fenêtre de jeu
 WindowWidth = 1020
@@ -29,11 +30,23 @@ class Niveau < Gosu::Window
     @moveLeft = 8
     @moveRight = 8
 
+		@morts50 = Gosu::Sample.new("50morts.wav")
+		@morts3 = Gosu::Sample.new("mort15.wav")
+		@mortBase = Gosu::Sample.new("ah.wav")
+		@mortBase2 = Gosu::Sample.new("mortBase2.wav")
+
+		@jump = Gosu::Sample.new("jump.wav")
+
     # postion du la caméra (en haut à gauche par défaut)
     @cameraX = @cameraY = 0
+
   end
 
   def update
+
+		if Gosu.button_down?(Gosu::KB_ESCAPE)
+			WindowMenu.show
+		end
 
     # Tant que le hero est en vie
     if (not @hero.isDead)
@@ -67,6 +80,18 @@ class Niveau < Gosu::Window
     # Si le héro est mort
     else
       @nbEssais += 1
+			if @nbEssais ==16
+				@morts3.play(0.55)
+			elsif @nbEssais == 51
+				@morts50.play(1)
+			else
+				@a = rand(0..1)
+				if @a == 0
+					@mortBase.play(1)
+				else
+					@mortBase2.play(0.5)
+				end
+			end
       @hero.jumpPower = -15 # Reset puissance du saut
       @moveLeft = 8 # Reset commandes
       @moveRight = 8
@@ -138,10 +163,10 @@ class Niveau < Gosu::Window
     case id
     when Gosu::KB_UP
       if (not @hero.isDead)
+				@jump.play(0.4)
         @hero.jump
       end
     when Gosu::KB_ESCAPE
-      self.close
     else
       super
     end

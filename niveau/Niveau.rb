@@ -20,7 +20,7 @@ class Niveau < Gosu::Window
     # Generation des composants du jeu
     @sky = Gosu::Image.new("ressources/sky1020.png", :tileable => true)
     @map = Terrain.new
-    @hero = Hero.new(@map, 400, 445)
+    @hero = Hero.new(@map, 400, 699)
 
     @nbEssais = 1
     @essais = Gosu::Font.new(20)
@@ -72,7 +72,7 @@ class Niveau < Gosu::Window
       @hero.update(0)
 
       @map.initialiserJeu
-      @hero.setPosition(400, 400)
+      @hero.setPosition(400, 699)
       @hero.mort = false
     end
 

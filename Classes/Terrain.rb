@@ -146,7 +146,7 @@ class Terrain
   # Genere le fichier niv.txt que sera chargé dans le jeu
   def genererTerrain
 
-  	nbTerrains = 5 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
+  	nbTerrains = 6 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
   	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
   	terrainHeight = 15 # Hauteur des terrains
 
@@ -166,7 +166,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/sautEnHauteur.txt"
+			nomF = "ressources/nivText/#{nums[i]}.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

@@ -66,7 +66,9 @@ class Niveau < Gosu::Window
     # Si le héro est mort
     else
       @nbEssais += 1
-      @hero.jumpPower = -15 # reset puissance du saut
+      @hero.jumpPower = -15 # Reset puissance du saut
+      @moveLeft = 8 # Reset commandes
+      @moveRight = 8
       @hero.update(0)
 
       @map.initialiserJeu

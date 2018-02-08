@@ -1,5 +1,4 @@
 require 'gosu'
-require 'waitutil'
 require_relative 'menuitem.rb'
 require_relative 'menu.rb'
 
@@ -7,12 +6,11 @@ require_relative 'menu.rb'
 class Window < Gosu::Window
 
   def initialize
-    @WIDTH = 500
-    @HEIGHT = 640
+    @WIDTH = 1020
+    @HEIGHT = 780
     super @WIDTH,@HEIGHT
     self.caption = "Pour la daronne"
-    @background_image = Gosu::Image.new('GFX/Backgroundmenu.png')
-    @player = Player.new
+    @background_image = Gosu::Image.new('GFX/Backgroundmenu2.png')
 
     @cursor = Gosu::Image.new(self, "GFX/curseurFeuille.png", false)
 		x = self.width / 1.8 - 100
@@ -23,9 +21,11 @@ class Window < Gosu::Window
     # fixe le volume à 0.4
     @song.volume = 0.40
 
+    @lesamis = Gosu::Song.new("lesamis.wav")
+    @lesamis.volume = 0.2
 
 @menu = Menu.new(self)
-      @menu.add_item(Gosu::Image.new(self, "GFX/Titre.png", false), 75, 55, 1, lambda {})
+      @menu.add_item(Gosu::Image.new(self, "GFX/Titre.png", false), 255, 55, 1, lambda {})
       y += lineHeight
 
       @menu.add_item(Gosu::Image.new(self, "GFX/JardinerUnclicked.png", false), x, y, 1, lambda {}, Gosu::Image.new(self, "GFX/JardinerClicked.png", false))
@@ -44,6 +44,14 @@ class Window < Gosu::Window
       @menu.add_item(Gosu::Image.new(self, "GFX/OptionUnclicked.png", false), x+35, y, 1, lambda {}, Gosu::Image.new(self, "GFX/OptionClicked.png", false))
 			y += lineHeight
 
+      @menu.add_item(Gosu::Image.new(self, "musiqueOn.png", false), 775, 550, 1, lambda {
+        @lesamis.play(true)
+        @lesamis.volume = 0.2
+        })
+
+      @menu.add_item(Gosu::Image.new(self, "musiqueOff.gif", false), 900, 570, 1, lambda {
+        @lesamis.volume = 0
+          })
 
 
   end
@@ -56,7 +64,6 @@ class Window < Gosu::Window
   def draw
     @cursor.draw(self.mouse_x, self.mouse_y, 2)
     @background_image.draw(0,0,0)
-    @player.draw()
     @menu.draw
 
   end
@@ -67,24 +74,3 @@ class Window < Gosu::Window
     end # end if
 	end # end button_down
 end # END CLASS WINDOWMENU
-
-
-class Player
-  def initialize
-    @y = 640/ 2 - 100
-		@x = 500  / 3 - 100
-    @z =0
-
-    @img = Gosu::Image.new('Roger.gif')
-
-  end # END INITIALIZE PLAYER
-
-  def update
-
-  end# END UPDATE PLAYER
-
-  def draw
-    @img.draw(@x,@y,@z)
-
-  end # END DRAW PLAYER
-end  # END CLASS PLAYER

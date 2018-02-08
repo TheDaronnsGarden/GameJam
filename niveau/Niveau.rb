@@ -96,6 +96,18 @@ class Niveau < Gosu::Window
         @hero.mort = true
       end
 
+      if (i == Tiles::GravityMoins)
+      	@hero.jumpPower = -25
+      end
+
+      if (i == Tiles::GravityPlus)
+      	@hero.jumpPower = -8
+      end
+
+      if (i == Tiles::ResetEffect)
+      	@hero.jumpPower = -15
+      end
+
     # BLOC SOUS LE PERSO
     elsif (where == 1)
 

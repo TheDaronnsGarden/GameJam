@@ -34,9 +34,6 @@ class Window < Gosu::Window
     #police
     @font = Gosu::Font.new(self, Gosu::default_font_name,40)
 
-    #index pour savoir quelle "fenetre" afficher
-    #0 : menu principal
-    #1 : score
     @index=0
     @t = 0
 
@@ -82,18 +79,12 @@ class Window < Gosu::Window
 
         }, Gosu::Image.new(self, "GFX/OptionClicked.png", false))
 			y += lineHeight
-
-
-
   end
-
   def update
     @t = @t+1
     if @index==0
       @menu.update
-
       #appui sur la tete
-
       case mouse_x
         when (150..176)
           case mouse_y
@@ -110,9 +101,7 @@ class Window < Gosu::Window
           end
     end#end mouse_x
   end#end update
-
   def draw
-
 
     if @index==0
       @cursor.draw(self.mouse_x, self.mouse_y, 2)
@@ -183,11 +172,6 @@ class Window < Gosu::Window
       @c=[]
       @d=[]
       @e=[]
-      @f=[]
-      @g=[]
-      @h=[]
-      @i=[]
-      @j=[]
 
       f.each_line{|ligne|
         @li = ligne.partition(";")#li : tableau avec
@@ -218,31 +202,6 @@ class Window < Gosu::Window
           @scoreE = @e[0]#score du 5eme joueur
           @nomE= @e[2].partition("\n")#supprime le retour a la ligne de la fin
           @nomE=@nomE[0]#nom du 5eme joueur
-        elsif @f.empty?
-          @f = @li.dup
-          @scoreF = @f[0]#score du 6eme joueur
-          @nomF= @f[2].partition("\n")#supprime le retour a la ligne de la fin
-          @nomF=@nomF[0]#nom du 6eme joueur
-        elsif @g.empty?
-          @g = @li.dup
-          @scoreG = @g[0]#score du 7eme joueur
-          @nomG= @g[2].partition("\n")#supprime le retour a la ligne de la fin
-          @nomG=@nomG[0]#nom du 7eme joueur
-        elsif @h.empty?
-          @h = @li.dup
-          @scoreH = @h[0]#score du 8eme joueur
-          @nomH= @h[2].partition("\n")#supprime le retour a la ligne de la fin
-          @nomH=@nomH[0]#nom du 8eme joueur
-        elsif @i.empty?
-          @i = @li.dup
-          @scoreI = @i[0]#score du 9eme joueur
-          @nomI= @i[2].partition("\n")#supprime le retour a la ligne de la fin
-          @nomI=@nomI[0]#nom du 9eme joueur
-        elsif @j.empty?
-          @j = @li.dup
-          @scoreJ = @j[0]#score du 10eme joueur
-          @nomJ= @j[2].partition("\n")#supprime le retour a la ligne de la fin
-          @nomJ=@nomJ[0]#nom du 10eme joueur
         end
       }
       # affichage du 1er joueur : Score  Nom
@@ -252,8 +211,6 @@ class Window < Gosu::Window
         @font.draw("00"+@scoreA+"   -   "+@nomA,@WIDTH/3,@HEIGHT/4,1,1.0,1.0,Gosu::Color::WHITE)
       elsif @scoreA.to_i>99&& @scoreA.to_i<1000
         @font.draw("0"+@scoreA+"   -   "+@nomA,@WIDTH/3,@HEIGHT/4,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreA+"   -   "+@nomA,@WIDTH/3,@HEIGHT/4,1,1.0,1.0,Gosu::Color::WHITE)
       end
       # affichage du 2eme joueur
       if @scoreB.to_i < 10
@@ -262,8 +219,6 @@ class Window < Gosu::Window
         @font.draw("00"+@scoreB+"   -   "+@nomB,@WIDTH/3,@HEIGHT/4+@font.height,1,1.0,1.0,Gosu::Color::WHITE)
       elsif @scoreB.to_i>99&& @scoreB.to_i<1000
         @font.draw("0"+@scoreB+"   -   "+@nomB,@WIDTH/3,@HEIGHT/4+@font.height,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreB+"   -   "+@nomB,@WIDTH/3,@HEIGHT/4+@font.height,1,1.0,1.0,Gosu::Color::WHITE)
       end
       # affichage du 3eme joueur
       if @scoreC.to_i < 10
@@ -272,8 +227,6 @@ class Window < Gosu::Window
         @font.draw("00"+@scoreC+"   -   "+@nomC,@WIDTH/3,@HEIGHT/4+@font.height*2,1,1.0,1.0,Gosu::Color::WHITE)
       elsif @scoreC.to_i>99&& @scoreC.to_i<1000
         @font.draw("0"+@scoreC+"   -   "+@nomC,@WIDTH/3,@HEIGHT/4+@font.height*2,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreC+"   -   "+@nomC,@WIDTH/3,@HEIGHT/4+@font.height*2,1,1.0,1.0,Gosu::Color::WHITE)
       end
       # affichage du 4eme joueur
       if @scoreD.to_i < 10
@@ -282,68 +235,14 @@ class Window < Gosu::Window
         @font.draw("00"+@scoreD+"   -   "+@nomD,@WIDTH/3,@HEIGHT/4+@font.height*3,1,1.0,1.0,Gosu::Color::WHITE)
       elsif @scoreD.to_i>99&& @scoreD.to_i<1000
         @font.draw("0"+@scoreD+"   -   "+@nomD,@WIDTH/3,@HEIGHT/4+@font.height*3,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreD+"   -   "+@nomD,@WIDTH/3,@HEIGHT/4+@font.height*3,1,1.0,1.0,Gosu::Color::WHITE)
       end
       # affichage du 5eme joueur
       if @scoreE.to_i < 10
         @font.draw("000"+@scoreE+"   -   "+@nomE,@WIDTH/3,@HEIGHT/4+@font.height*4,1,1.0,1.0,Gosu::Color::WHITE)
       elsif @scoreE.to_i>9 && @scoreE.to_i<100
         @font.draw("00"+@scoreE+"   -   "+@nomE,@WIDTH/3,@HEIGHT/4+@font.height*4,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreE.to_i>99&& @scoreE.to_i<1000
+      else @scoreE.to_i>99&& @scoreE.to_i<1000
         @font.draw("0"+@scoreE+"   -   "+@nomE,@WIDTH/3,@HEIGHT/4+@font.height*4,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreE+"   -   "+@nomE,@WIDTH/3,@HEIGHT/4+@font.height*4,1,1.0,1.0,Gosu::Color::WHITE)
-      end
-      # affichage du 6eme joueur
-      if @scoreF.to_i < 10
-        @font.draw("000"+@scoreF+"   -   "+@nomF,@WIDTH/3,@HEIGHT/4+@font.height*5,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreF.to_i>9 && @scoreF.to_i<100
-        @font.draw("00"+@scoreF+"   -   "+@nomF,@WIDTH/3,@HEIGHT/4+@font.height*5,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreF.to_i>99&& @scoreF.to_i<1000
-        @font.draw("0"+@scoreF+"   -   "+@nomF,@WIDTH/3,@HEIGHT/4+@font.height*5,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreF+"   -   "+@nomF,@WIDTH/3,@HEIGHT/4+@font.height*5,1,1.0,1.0,Gosu::Color::WHITE)
-      end
-      # affichage du 7eme joueur
-      if @scoreG.to_i < 10
-        @font.draw("000"+@scoreG+"   -   "+@nomG,@WIDTH/3,@HEIGHT/4+@font.height*6,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreG.to_i>9 && @scoreG.to_i<100
-        @font.draw("00"+@scoreG+"   -   "+@nomG,@WIDTH/3,@HEIGHT/4+@font.height*6,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreG.to_i>99&& @scoreG.to_i<1000
-        @font.draw("0"+@scoreG+"   -   "+@nomG,@WIDTH/3,@HEIGHT/4+@font.height*6,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreG+"   -   "+@nomG,@WIDTH/3,@HEIGHT/4+@font.height*6,1,1.0,1.0,Gosu::Color::WHITE)
-      end
-      # affichage du 8eme joueur
-      if @scoreH.to_i < 10
-        @font.draw("000"+@scoreH+"   -   "+@nomH,@WIDTH/3,@HEIGHT/4+@font.height*7,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreH.to_i>9 && @scoreH.to_i<100
-        @font.draw("00"+@scoreH+"   -   "+@nomH,@WIDTH/3,@HEIGHT/4+@font.height*7,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreH.to_i>99&& @scoreH.to_i<1000
-        @font.draw("0"+@scoreH+"   -   "+@nomH,@WIDTH/3,@HEIGHT/4+@font.height*7,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreH+"   -   "+@nomH,@WIDTH/3,@HEIGHT/4+@font.height*7,1,1.0,1.0,Gosu::Color::WHITE)
-      end
-      # affichage du 9eme joueur
-      if @scoreI.to_i < 10
-          @font.draw("000"+@scoreI+"   -   "+@nomI,@WIDTH/3,@HEIGHT/4+@font.height*8,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreI.to_i>9 && @scoreI.to_i<100
-        @font.draw("00"+@scoreI+"   -   "+@nomI,@WIDTH/3,@HEIGHT/4+@font.height*8,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreI.to_i>99&& @scoreI.to_i<1000
-        @font.draw("0"+@scoreI+"   -   "+@nomI,@WIDTH/3,@HEIGHT/4+@font.height*8,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreI+"   -   "+@nomI,@WIDTH/3,@HEIGHT/4+@font.height*8,1,1.0,1.0,Gosu::Color::WHITE)
-      end
-      # affichage du 10eme joueur
-      if @scoreJ.to_i < 10
-        @font.draw("000"+@scoreJ+"   -   "+@nomJ,@WIDTH/3,@HEIGHT/4+@font.height*9,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreJ.to_i>9 && @scoreJ.to_i<100
-        @font.draw("00"+@scoreJ+"   -   "+@nomJ,@WIDTH/3,@HEIGHT/4+@font.height*9,1,1.0,1.0,Gosu::Color::WHITE)
-      elsif @scoreB.to_i>99&& @scoreJ.to_i<1000
-        @font.draw("0"+@scoreJ+"   -   "+@nomJ,@WIDTH/3,@HEIGHT/4+@font.height*9,1,1.0,1.0,Gosu::Color::WHITE)
-      else
-        @font.draw(@scoreJ+"   -   "+@nomJ,@WIDTH/3,@HEIGHT/4+@font.height*9,1,1.0,1.0,Gosu::Color::WHITE)
       end
     end
 

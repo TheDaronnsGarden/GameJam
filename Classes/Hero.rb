@@ -22,12 +22,12 @@ class Hero
     # Symetrie verticale selon la direction où regarde le perso
     if @dir == :left
       offs_x = -25
-      factor = 1.0
+      sym = 1.0
     else
       offs_x = 25
-      factor = -1.0
+      sym = -1.0
     end
-    @cur_image.draw(@x + offs_x, @y - 49, 2, factor, 1.0)
+    @cur_image.draw(@x + offs_x, @y - 49, 2, sym, 1.0)
   end
 
   def setPosition(x, y)

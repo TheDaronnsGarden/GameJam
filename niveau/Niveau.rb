@@ -4,11 +4,14 @@ require_relative '../Classes/Hero'
 require_relative '../Classes/Terrain'
 
 # Taille de la fenêtre de jeu
-WindowWidth = 1280
-WindowHeight = 720
+WindowWidth = 1020
+WindowHeight = 780
 
 
 class Niveau < Gosu::Window
+
+	attr_accessor :nbEssais
+
   def initialize
     super WindowWidth, WindowHeight
 
@@ -19,11 +22,14 @@ class Niveau < Gosu::Window
     @map = Terrain.new
     @hero = Hero.new(@map, 400, 445)
 
+    @nbEssais = 1
+    @essais = Gosu::Font.new(20)
+
     # Nombre de pixels par tick
     @moveLeft, @moveRight = 8, 8
 
-    # postion du la caméra (en haut à cauche par défaut)
-    @camera_x = @camera_y = 0
+    # postion du la caméra (en haut à gauche par défaut)
+    @cameraX = @cameraY = 0
   end
 
   def update
@@ -33,13 +39,18 @@ class Niveau < Gosu::Window
 
       moveX = 0
 
-      if (Gosu.button_down?(Gosu::KB_LEFT)) then moveX -= @moveLeft end
-      if (Gosu.button_down?(Gosu::KB_RIGHT)) then moveX += @moveRight end
+      if (Gosu.button_down?(Gosu::KB_LEFT))
+      	moveX -= @moveLeft
+      end
+      if (Gosu.button_down?(Gosu::KB_RIGHT))
+      	moveX += @moveRight
+      end
+
       @hero.update(moveX)
 
       # La caméra suit le joueur
-      @camera_x = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
-      @camera_y = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
+      @cameraX = [[@hero.x - WindowWidth / 2, 0].max, @map.width * 50 - WindowWidth].min
+      @cameraY = [[@hero.y - WindowHeight / 2, 0].max, @map.height * 50 - WindowHeight].min
 
       # On test en permanence le bloc dans lequel est le perso
       blockAction(0, @map.blockPlayer(@hero.x, @hero.y))
@@ -48,17 +59,18 @@ class Niveau < Gosu::Window
       blockAction(1, @map.blockPlayer(@hero.x, @hero.y+50))
 
       # Si le joueur tombe dans le vide, il est mort
-      if (@hero.y > 720)
+      if (@hero.y > WindowHeight)
         @hero.mort = true
       end
 
     # Si le héro est mort
     else
+      @nbEssais += 1
       @hero.update(0)
-      # sleep(1)
-      @hero.mort = false
+
       @map.initialiserJeu
       @hero.setPosition(400, 400)
+      @hero.mort = false
     end
 
   end
@@ -86,16 +98,19 @@ class Niveau < Gosu::Window
 
     # BLOC SOUS LE PERSO
     elsif (where == 1)
+
       if (i == Tiles::Poison) # bloc poison
         @hero.mort = true
       end
+
     end
   end
 
   # Dessine le background et gère le mouvement de la caméra
   def draw
-    @sky.draw 0, 0, 0
-    Gosu.translate(-@camera_x, -@camera_y) do
+  	@essais.draw("Essais : #{@nbEssais}", 10, 10, 2, 1.0, 1.0, Gosu::Color::WHITE) # Affiche le nombre d'essais
+    @sky.draw(0, 0, 0) # Backgrounf
+    Gosu.translate(-@cameraX, -@cameraY) do
       @map.draw
       @hero.draw
     end

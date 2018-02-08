@@ -26,6 +26,8 @@ class Window < Gosu::Window
     @lesamis = Gosu::Song.new("musique.wav")
     @lesamis.volume = 0
 
+    @amis = Gosu::Sample.new("amis.wav")
+
     #image du bouton menu principal
     @imageQuitter = Gosu::Image.new("GFX/retour.png")
 
@@ -89,8 +91,25 @@ class Window < Gosu::Window
     @t = @t+1
     if @index==0
       @menu.update
-    end
-  end
+
+      #appui sur la tete
+
+      case mouse_x
+        when (150..176)
+          case mouse_y
+            when (680..727)
+              if (button_down?Gosu::MsLeft) && @o==0
+                @o=1
+                @amis.play
+              end#end if button && o
+            else#end when
+              @o=0
+            end#end mouse_y
+          else
+            @o=0
+          end
+    end#end mouse_x
+  end#end update
 
   def draw
 

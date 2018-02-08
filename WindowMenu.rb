@@ -9,7 +9,7 @@ class Window < Gosu::Window
     @WIDTH = 1020
     @HEIGHT = 780
     super @WIDTH,@HEIGHT
-    self.caption = "Pour la daronne"
+    self.caption = "The Darron's Garden"
     @background_image = Gosu::Image.new('GFX/Backgroundmenu2.png')
 
     @cursor = Gosu::Image.new(self, "GFX/curseurFeuille.png", false)
@@ -17,12 +17,22 @@ class Window < Gosu::Window
 		y = self.height  / 3.5 - 100
 		lineHeight = 90
 
-    @song = Gosu::Song.new("Quitter.wav")
-    # fixe le volume à 0.4
-    @song.volume = 0.40
+    @song = Gosu::Sample.new("pourquoiv2.wav")
 
     @lesamis = Gosu::Song.new("lesamis.wav")
     @lesamis.volume = 0.2
+
+    #police
+    @font = Gosu::Font.new(self, Gosu::default_font_name,40)
+
+    #index pour savoir quelle "fenetre" afficher
+    #0 : menu principal
+    #1 : score
+    #2 : game over
+    #3 : parametres
+    #4 : jeu
+
+    @index=0
 
 @menu = Menu.new(self)
       @menu.add_item(Gosu::Image.new(self, "GFX/Titre.png", false), 255, 55, 1, lambda {})
@@ -35,8 +45,8 @@ class Window < Gosu::Window
 			y += lineHeight
 
       @menu.add_item(Gosu::Image.new(self, "GFX/QuitterUnclicked.png", false), x, y, 1, lambda {
-        @song.play(true)
-        sleep 0.5
+        @song.play(1)
+        sleep 1.2
         self.close
         }, Gosu::Image.new(self, "GFX/QuitterClicked.png", false))
       y += lineHeight

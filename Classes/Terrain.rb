@@ -22,9 +22,15 @@ class Terrain
 
   def initialize
 
-  	filename = "ressources/nivText/niv.txt"
+  	initialiserJeu
 
-  	genererTerrain
+  end
+
+  def initialiserJeu
+
+    filename = "ressources/nivText/niv.txt"
+
+    genererTerrain
 
     # Load 60x60 tiles, 5px overlap in all four directions.
     @tileset = Gosu::Image.load_tiles("ressources/tileset5.png", 60, 60, :tileable => true)
@@ -67,7 +73,7 @@ class Terrain
         end
       end
     end
-
+    
   end
 
 
@@ -84,10 +90,10 @@ class Terrain
           end
 
           if (tile == Tiles::PicsInv) # Methode de dessin spéciale pour les pics inversés
-            tile = 3
-            @tileset[tile].draw(i * 50 - 5, j * 62.5, 0, 1, -1)
-          else
+                     
             @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 0)
+          else 
+            @tileset[tile].draw(i * 50 - 5, j * 50 - 5, 1)
           end
         end
       end
@@ -160,7 +166,11 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
+<<<<<<< HEAD
 			nomF = "ressources/nivText/NiveauDur.txt"
+=======
+			nomF = "ressources/nivText/#{nums[i]}.txt"
+>>>>>>> b5d31d93df0a2285e73e5ceba655cc6db47df046
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

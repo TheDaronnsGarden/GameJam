@@ -96,7 +96,7 @@ class Terrain
 
   # Solid at a given pixel position?
   def isSolid(x, y)
-    (y < 0 || @tiles[x / 50][y / 50]) &&
+    (y < -500|| @tiles[x / 50][y / 50]) &&
       ((not @tiles[x / 50][y / 50] == 2) && (not @tiles[x / 50][y / 50] == 3) && (not @tiles[x / 50][y / 50] == 4) && (not @tiles[x / 50][y / 50] == 5) &&
         (not @tiles[x / 50][y / 50] == 6) && (not @tiles[x / 50][y / 50] == 7) && (not @tiles[x / 50][y / 50] == 8) && (not @tiles[x / 50][y / 50] == 9) &&
         (not @tiles[x / 50][y / 50] == 10) && (not @tiles[x / 50][y / 50] == 11) && (not @tiles[x / 50][y / 50] == 12) && (not @tiles[x / 50][y / 50] == 13))
@@ -142,7 +142,7 @@ class Terrain
 
   	nbTerrains = 5 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
   	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
-  	terrainHeight = 10 # Hauteur des terrains
+  	terrainHeight = 15 # Hauteur des terrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
 
@@ -160,7 +160,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/NiveauChampi.txt"
+			nomF = "ressources/nivText/NiveauDur.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

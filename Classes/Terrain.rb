@@ -166,7 +166,7 @@ class Terrain
 
 		for i in 0..nbGenTerrain-1
 
-			nomF = "ressources/nivText/#{nums[i]}.txt"
+			nomF = "ressources/nivText/niveauSami.txt"
 			f = File.readlines(nomF)
 			f = f.map {|elem| elem.chomp}
 

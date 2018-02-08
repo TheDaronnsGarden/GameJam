@@ -26,7 +26,8 @@ class Niveau < Gosu::Window
     @essais = Gosu::Font.new(20)
 
     # Nombre de pixels par tick
-    @moveLeft, @moveRight = 8, 8
+    @moveLeft = 8
+    @moveRight = 8
 
     # postion du la caméra (en haut à gauche par défaut)
     @cameraX = @cameraY = 0
@@ -70,6 +71,7 @@ class Niveau < Gosu::Window
       @moveLeft = 8 # Reset commandes
       @moveRight = 8
       @hero.update(0)
+      sleep(0.1)
 
       @map.initialiserJeu
       @hero.setPosition(400, 699)

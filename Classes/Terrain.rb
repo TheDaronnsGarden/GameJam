@@ -146,9 +146,11 @@ class Terrain
   # Genere le fichier niv.txt que sera chargé dans le jeu
   def genererTerrain
 
-  	nbTerrains = 6 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
-  	nbGenTerrain = 1 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
+  	nbTerrains = 7 # Nb TOTAL de terrains (de 0.txt à nbTerrains-1.txt)
+  	nbGenTerrain = 10 # Nb de terrain à générer pour le niveau final (en plus du début et de la fin)
   	terrainHeight = 15 # Hauteur des terrains
+
+    # nbPossibiltésDiffs = nbTerrain ^ nbGenTerrains
 
   	nums = nbGenTerrain.times.map{ Random.rand(nbTerrains) }
 

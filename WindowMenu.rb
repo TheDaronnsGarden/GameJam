@@ -1,7 +1,7 @@
 require 'gosu'
 require_relative 'menuitem.rb'
 require_relative 'menu.rb'
-require_relative 'Niveau/Niveau.rb'
+require_relative 'niveau/Niveau.rb'
 
 
 class Window < Gosu::Window

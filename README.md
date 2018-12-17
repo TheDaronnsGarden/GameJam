@@ -1,8 +1,8 @@
 # Le jeu
 
 - Thème : Evénements aléatoires et rejouabilité
-- Langage : Ruby
-- Librairie graphique : Gosu
+* Langage : Ruby
+  * Librairie graphique : Gosu
 
 ### Delais #
 
